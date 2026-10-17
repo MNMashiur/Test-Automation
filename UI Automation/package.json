@@ -1,0 +1,25 @@
+{
+  "name": "ui-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Task1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:q1": "mocha Task1.js --reporter mochawesome",
+    "test:q2": "mocha Task2.js --reporter mochawesome",
+    "test:q3": "mocha Task3.js --reporter mochawesome",
+    "test:all": "mocha Task1.js Task2.js Task3.js --reporter mochawesome"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "chai": "^6.3.0",
+    "selenium-webdriver": "^4.51.0"
+  },
+  "devDependencies": {
+    "mocha": "^12.0.3",
+    "mochawesome": "^8.1.1"
+  }
+}

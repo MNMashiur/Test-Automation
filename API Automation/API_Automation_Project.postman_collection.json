@@ -1,0 +1,219 @@
+{
+  "info": {
+    "_postman_id": "4dee566e-d51b-4d00-be1f-fba42bc7d2d0",
+    "name": "API Automation Project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56547245"
+  },
+  "item": [
+    {
+      "name": "Q3_Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "\r\nvar responseBody = pm.response.json();\r\n\r\npm.test(\"Validate status code is 200\", () => {\r\n    pm.expect(200).to.eql(pm.response.code);\r\n});\r\n\r\nconst authToken = responseBody.token;\r\n\r\npm.test(\"Capture authToken\", () => {\r\n    pm.collectionVariables.set(\"authToken\", authToken);\r\n    pm.expect(pm.collectionVariables.get(\"authToken\")).to.eql(authToken);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "ajax",
+            "value": "true"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "x-api-key",
+            "value": "pub_252e9756aab871d7d6ac92a5a9417aa65a11068e1d36f13026c2f4551b17b87f"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"eve.holt@reqres.in\",\r\n  \"password\": \"cityslicka\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q4_Get User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var responseBody = pm.response.json();\r\n\r\npm.test(\"Validate status code is 200\", () => {\r\n    pm.expect(200).to.eql(pm.response.code);\r\n});\r\n\r\npm.test(\"Validate user name and email\", () => {\r\n    pm.expect(responseBody.data.first_name).to.eql(\"Janet\");\r\n    pm.expect(responseBody.data.email).to.eql(\"janet.weaver@reqres.in\");\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/users/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5_Put Updated Profile",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var responseBody = pm.response.json();\r\n\r\npm.test(\"Validate status code is 200\", () => {\r\n    pm.expect(200).to.eql(pm.response.code);\r\n});\r\n\r\npm.test(\"Validate updatedAt timestamp exists\", () => {\r\n    pm.expect(responseBody.updatedAt).to.be.a(\"string\");\r\n    pm.expect(responseBody.updatedAt).to.not.be.empty;\r\n    pm.expect(new Date(responseBody.updatedAt).toISOString())\r\n        .to.eql(responseBody.updatedAt);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Mashiur Rahaman\",\r\n    \"job\": \"Software Engineer\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q6_Patch Single Field",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var responseBody = pm.response.json();\r\n\r\npm.test(\"Validate status code is 200\", () => {\r\n    pm.expect(200).to.eql(pm.response.code);\r\n});\r\n\r\npm.test(\"Validate only the requested (name) field changed\", () => {\r\n    pm.expect(responseBody.name).to.eql(\"Niran\");\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Niran\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users/2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q8_Execute bad requests",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Validate response is a 4xx client error\", () => {\r\n    pm.expect(pm.response.code).to.be.within(400, 499);\r\n});\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": ""
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/users/999999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users",
+            "999999"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://reqres.in/api"
+    },
+    {
+      "key": "authToken",
+      "value": ""
+    }
+  ]
+}
