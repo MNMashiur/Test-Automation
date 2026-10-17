@@ -1,11 +1,11 @@
-# Ostad SQA: Manual & Automation Testing
+# Ostad SQA: Automation Testing Project
 
 This repository contains my coursework and assessment projects for the **Ostad — SQA: Manual & Automation Testing** course. It includes UI automation tests built with Selenium WebDriver and API automation tests created in Postman and executed locally with Newman.
 
 ## Project Structure
 
 ```text
-Ostad-SQA/
+Test-Automation/
 ├── API Automation/
 │   ├── newman/
 │   │   └── API Automation Project-<run>.html
@@ -27,7 +27,7 @@ Ostad-SQA/
 └── README.md
 ```
 
-> The exact Newman report filename may vary by run. The `node_modules/` folders are local dependency directories and should generally not be committed to GitHub; dependencies can be installed with `npm install` in the relevant project folder.
+> The exact Newman report filename may vary by run. The `node_modules/` or local dependency can be installed with `npm install` in the relevant project folder.
 
 ## Folder Overview
 
@@ -50,7 +50,7 @@ Contains the Selenium-based UI automation tests for SauceDemo.
 - **`Task3.js`** — Q3: sorts products by name from Z to A and completes a purchase.
 - **`mochawesome-report/`** — generated HTML and JSON test reports, plus report assets.
 - **`package.json` and `package-lock.json`** — project configuration, npm scripts, and dependency versions.
-- **`README.md`** — UI automation setup, installation, test execution, reporting, and troubleshooting instructions.
+- **`README_UI_Automation.md`** — UI automation setup, installation, test execution, reporting, and troubleshooting instructions.
 
 **Tools:** JavaScript, Selenium WebDriver, Mocha, Chai, and Mochawesome.
 
@@ -59,7 +59,7 @@ Contains the Selenium-based UI automation tests for SauceDemo.
 Open the relevant project folder in a terminal and follow its README:
 
 - For API automation, read [`API Automation/README_API_Automation.md`](API%20Automation/README_API_Automation.md).
-- For UI automation, read [`UI Automation/README.md`](UI%20Automation/README.md).
+- For UI automation, read [`UI Automation/README.md`](UI%20Automation/README_UI_Automation.md).
 
 Install the required dependencies in each project folder before running its tests. Do not commit real API keys, passwords, or authentication tokens.
 
